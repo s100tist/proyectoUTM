@@ -40,8 +40,9 @@ class Server {
                     req.body.token,
                     process.env.TOKEN_SECRET || 'prueba'
                 );
-
+                console.log('**', decodificado)
                 const result1 = (await this.queryProfesor(decodificado)) as any;
+                console.log('result 1: ',result1)
                 if (result1.length == 0) res.json(0);
                 else res.json(result1[0]);
             } catch (err) {
@@ -52,7 +53,7 @@ class Server {
     queryProfesor = (decodificado: any) => {
         return new Promise((resolve, reject) => {
             let consulta =
-                'SELECT * FROM profesores WHERE correo="' + decodificado + '"';
+                'SELECT * FROM profesores WHERE correoProfesor="' + decodificado + '"';
             pool.query(consulta, (error: any, results: any) => {
                 if (error) return reject(error);
                 return resolve(results);

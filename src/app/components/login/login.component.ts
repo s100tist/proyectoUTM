@@ -36,13 +36,13 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('correo',this.usuario.correo);
             localStorage.setItem('idProfesor', this.idProfesor + '');
             this.router.navigateByUrl(`/home/generales/${this.idProfesor}`);
-          } else {
+          } /*else {
             Swal.fire({
               position: 'center',
               icon: 'error',
               title: `Datos incorrectos`,
             });
-          }
+          }*/
         });
     }
   }

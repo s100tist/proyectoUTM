@@ -69,12 +69,18 @@ class ProfesoresController {
 		res.json(respuesta);
 	}
 
-	public async update(req: Request, res: Response): Promise<void> {
+	public async cambiarContrasena(req: Request, res: Response): Promise<void> {
 		const {idProfesor} = req.params;
-		console.log(idProfesor);
-		const respuesta = await pool.query("UPDATE profesores SET ? WHERE idProfesor = ?", [req.body, idProfesor]);
-		res.json(respuesta);
+		let password = req.body.password as any;
+		console.log('contraseña de password: ',password)
+		var salt = bcrypt.genSaltSync(10)
+		bcrypt.hash(req.body.password, salt).then(function (nuevoPassword) {
+			req.body.password = nuevoPassword;
+			const resp = pool.query('UPDATE profesores set ? WHERE idProfesor = ?',[req.body,idProfesor]);
+			res.json(resp);
+		})
 	}
+
 
 	public async listProfesoresByCarrera(req: Request, res: Response): Promise<void> {
 		const {idCarrera} = req.params;

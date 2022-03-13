@@ -13,9 +13,8 @@ export class CorreoService {
     );
   }
   decodificarMail(token: any) {
-    let dato = { token: token };
     return this.http.post(
-      `${environment.API_URL_CORREOS}/decodificarMail`,dato
+      `${environment.API_URL_CORREOS}/decodificarMail/`,token
     );
   }
 }

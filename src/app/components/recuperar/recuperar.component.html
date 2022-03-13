@@ -13,17 +13,14 @@
 							<h5>Cambiar Contraseña</h5>
 						</div>
 						<div class="row">
-
-
-							<div class="col s12 customInput">
 								<i class="material-icons prefix">Nueva Contraseña</i>
-								<input class="browser-default" type="browser-default" name="contraseña"
+								<input [(ngModel)]='contra' class="browser-default" type="password" 
 									id="contraseña" placeholder="contraseña" autocomplete="off">
 							</div>
 
 							<div class="col s12 customInput">
 								<i class="material-icons prefix">Confirmar Contraseña</i>
-								<input class="browser-default" type="password"
+								<input [(ngModel)]='contra2' class="browser-default" type="password"
 									name="confirmarContraseña" id="confirmarContraseña" placeholder="confirmar contraseña" autocomplete="off">
 
 							</div>
@@ -32,7 +29,8 @@
                     <button (click)="verificarContrasena()" class="btn col l12 s12 m12 btnLogin ">
                         Confirmar
                     </button>
-			</div>
+				</div>
+				<small>Una vez que introduzcas una contraseña válida y des click en confirmar, serás re-dirigido a login</small>
 		</div>
 	</div>
 </div>

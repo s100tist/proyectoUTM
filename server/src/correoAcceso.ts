@@ -5,14 +5,14 @@ dotenv.config();
 module.exports = (formulario: any) => {
     const token: string = jwt.sign(formulario.correo, process.env.TOKEN_SECRET || 'prueba');
     var server = email.server.connect({
-        user: 'snifexkeylogger@gmail.com',
-        password: 'estupido014',
+        user: 'scaryskriller@gmail.com',
+        password: 'HolaSoyUnaPrueba15',
         host: 'smtp.gmail.com',
         ssl: true,
     });
     var message: any = {};
     message = {
-        from: 'Desarrollo UTM <erik@mixteco.utm.mx>',
+        from: 'Desarrollo UTM <cambio@correo.utm.mx>',
         to: formulario.correo,
         bcc: '',
         subject: 'Cambio de contraseña',

@@ -11,7 +11,7 @@ export class UsuarioService {
 
   }
 
-  existe(correo: string, password: string){
-	  return this.http.get(`${environment.API_URL}/profesores/existe/${correo}/${password}`);
+  existe(correo: string, password: any){
+	  return this.http.post(`${environment.API_URL}/profesores/existe/${correo}`, password);
   }
 }

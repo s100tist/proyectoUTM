@@ -41,25 +41,28 @@ class ProfesoresController {
 	}
 
 	public async existe(req: Request, res: Response): Promise<void> {
-		const {correo, password} = req.params;
+
+		console.log("existe")
+		const { correoProfesor } = req.params;
+		let password = req.body.password; 
 		let token: string;
-		let consulta =  `SELECT idProfesor, password FROM profesores WHERE correoProfesor = '${correo}'`;
+		let consulta = "SELECT idProfesor,password FROM Profesores WHERE correoProfesor = '" + correoProfesor + "'";
 		const respuesta = await pool.query(consulta);
-		if (respuesta.length > 0){
+		console.log(respuesta)
+		if (respuesta.length > 0) {
 			bcrypt.compare(password, respuesta[0].password, (err, resEncriptar) => {
-				if (resEncriptar == true){
-					token = jwt.sign(correo, process.env.TOKEN_SECRET || 'prueba');
-					console.log(process.env.TOKEN_SECRET);
-					res.json({"token": token, "idProfesor": respuesta[0].idProfesor});
-					// res.json(respuesta[0].idProfesor);
-				} else {
-					res.json(-1);
+				if (resEncriptar == true) {
+					token = jwt.sign(correoProfesor, process.env.TOKEN_SECRET || 'prueba');
+					console.log(token);
+					res.json({'token': token, 'idProfesor': respuesta[0].idProfesor});
 				}
+				else
+					res.json(-1);
 				return;
-			});
-		} else {
-			res.json(-1);
+			})
 		}
+		else
+			res.json(-1);
 	}
 
 	public async delete(req: Request, res: Response): Promise<void> {
@@ -74,10 +77,10 @@ class ProfesoresController {
 		let password = req.body.password as any;
 		console.log('contraseña de password: ',password)
 		var salt = bcrypt.genSaltSync(10)
-		bcrypt.hash(req.body.password, salt).then(function (nuevoPassword) {
-			req.body.password = nuevoPassword;
-			const resp = pool.query('UPDATE profesores set ? WHERE idProfesor = ?',[req.body,idProfesor]);
-			res.json(resp);
+		bcrypt.hash(req.body.password, salt).then(function (newPassword) {
+			req.body.password = newPassword;
+			const respuesta = pool.query('UPDATE profesores set ? WHERE idProfesor = ?',[req.body,idProfesor]);
+			res.json(respuesta);
 		})
 	}
 

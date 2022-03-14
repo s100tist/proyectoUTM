@@ -15,6 +15,7 @@ declare var $: any;
 export class LoginComponent implements OnInit {
   usuario: Usuario;
   idProfesor: number;
+  password!: any
   
 
   constructor(private usuarioService: UsuarioService, private router: Router, private correoService: CorreoService) {
@@ -25,27 +26,33 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   logueo(): void {
-    if (!(this.usuario.correo === '') && !(this.usuario.password === '')) {
+    if(this.usuario.correo=='' || this.usuario.password == ''){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: `Datos incorrectos`,
+      });
+    }else{
+      this.password = {'password' : this.usuario.password}
       this.usuarioService
-        .existe(this.usuario.correo, this.usuario.password)
-        .subscribe((resUsuario) => {
-          if (resUsuario != -1) {
-            console.log(resUsuario);
-            this.idProfesor = Number('Token:\n' + resUsuario);
-            localStorage.setItem('token', resUsuario + '');
-            localStorage.setItem('correo',this.usuario.correo);
-            localStorage.setItem('idProfesor', this.idProfesor + '');
-            this.router.navigateByUrl(`/home/generales/${this.idProfesor}`);
-          } /*else {
-            Swal.fire({
-              position: 'center',
-              icon: 'error',
-              title: `Datos incorrectos`,
-            });
-          }*/
-        });
+      .existe(this.usuario.correo, this.password)
+      .subscribe((resUsuario) => {
+        console.log(resUsuario);
+        if (resUsuario != -1) {
+          console.log('res usuario: '+resUsuario)
+          this.idProfesor = Number('Token:\n' + resUsuario);
+          localStorage.setItem('token', resUsuario + '');
+          localStorage.setItem('correo',this.usuario.correo);
+          console.log('id profesor', + this.idProfesor)
+          localStorage.setItem('idProfesor', this.idProfesor + '');
+          this.router.navigateByUrl(`/home/generales/${this.idProfesor}`);
+        } 
+      });
     }
   }
+
+
+ 
 
   modalCambiarPassword(): void {
     console.log('modalCambiarPass');

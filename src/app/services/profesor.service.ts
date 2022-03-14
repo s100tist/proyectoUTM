@@ -12,8 +12,8 @@ export class ProfesorService {
 
 	}
 
-	existe(correo: string, password: string) {
-		return this.http.get(`${environment.API_URL}/profesores/existe/${correo}/${password}`);
+	existe(profesor: Profesor, correo: string) {
+		return this.http.post(`${environment.API_URL}/profesores/existe/${correo}`,profesor);
 	}
 
 	guardarProfesor(profesor: Profesor) {

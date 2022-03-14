@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute , Route, Router} from '@angular/router';
 import { CorreoService } from 'src/app/services/correo.service';
 import { ProfesorService } from 'src/app/services/profesor.service';
+import Swal from 'sweetalert2';
+declare var $: any;
 
 
 @Component({
@@ -45,6 +47,11 @@ export class RecuperarComponent implements OnInit {
   verificarContrasena(): void {
     if((this.contra) == '' || (this.contra2 != this.contra)){
         console.log('contraseñas inválidas')
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: `Datos inválidos, la contraseña no debe estar vacia y la confirmacion debe ser igual a la contraseña`,
+        });
     }else{
       this.password = {'password' : this.contra }
       this.profeService.cambiarContrasena(this.password, this.id ).subscribe(err => console.error(err));
@@ -53,6 +60,13 @@ export class RecuperarComponent implements OnInit {
 
 }
 }
+
+contrasenaValida(): void {
+  console.log('modal contraseña invalida');
+  $('#modalCambiarPassword').modal({ dismissible: false });
+  $('#modalCambiarPassword').modal('open');
+}
+
 
 
 } 

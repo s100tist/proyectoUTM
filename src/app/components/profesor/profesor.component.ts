@@ -20,7 +20,7 @@ export class ProfesorComponent implements OnInit {
 	}
 
 	existe(): void {
-		this.profesorService.existe(this.profesor.correoProfesor, this.profesor.password).subscribe(resProfesor => {
+		this.profesorService.existe(this.profesor ,this.profesor.correoProfesor).subscribe(resProfesor => {
 			console.log(resProfesor);
 			if (resProfesor) {
 				localStorage.setItem('correo', this.profesor.correoProfesor);

@@ -39,3 +39,48 @@
 		</tbody>
 	</table>
 </div>
+<div class="fixed-action-btn">
+	<a class="btn-floating btn-large red">
+	  <i class="large material-icons">mode_edit</i>
+	</a>
+	<ul>
+	  <li><a (click)="modalRegistro()" class="btn-floating red"><i class="material-icons">insert_chart</i></a></li>
+	  <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+	  <li><a class="btn-floating green"><i class="material-icons">publish</i></a></li>
+	  <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+	</ul>
+  </div>
+
+  <div id="modalRegistro" class="modal">
+	<div class="modal-content">
+		<div class="row" style="margin-bottom: 0px !important;">
+			<div class="col s12">
+				<h5 class="center">Recuperar contraseña</h5>
+			</div>
+		</div>
+		<div class="row" style="margin-bottom: 0px !important;">
+			<div class="col s12">
+				<p>Revisa tu correo electrónico,revisa el correo no deseado.</p>
+			</div>
+		</div>
+		<div style="border: .5px solid #78909c; padding: 10px;">
+			<div class="row">
+				<div class="col s12">
+					<label>Correo electrónico</label>
+					<input required type="browser default"  placeholder="articulo"
+						value="">
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s6 center">
+					<a class=" modal-action modal-close waves-effect waves-green btn-flat">Enviar</a>
+
+				</div>
+				<div class="col s6 center">
+					<a class=" modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

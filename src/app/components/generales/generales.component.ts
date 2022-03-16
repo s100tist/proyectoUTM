@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProfesorService } from 'src/app/services/profesor.service';
 import { Profesor } from 'src/app/models/profesor.model';
+declare var $ : any
 
 @Component({
 	selector: 'app-generales',
@@ -19,6 +20,16 @@ export class GeneralesComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+
+		$(document).ready(function(){
+			$('.fixed-action-btn').floatingActionButton({
+				direction: 'left',
+				hoverEnabled: false
+			});
+			$('select').formSelect();
+		  });
+
+
 		this.router.paramMap.subscribe(params => {
 			this.idProfesor = Number(params.get('idProfesor'));
 			this.profesorService.listOne(this.idProfesor).subscribe((resProfesor: any) => {
@@ -34,6 +45,11 @@ export class GeneralesComponent implements OnInit {
 			// 	error: (err) => console.error(err)
 			// });
 		});
+	}
+	modalRegistro(){
+		console.log('registro')
+		$('#modalRegistro').modal({ dismissible: false });
+		$('#modalRegistro').modal('open');
 	}
 
 }

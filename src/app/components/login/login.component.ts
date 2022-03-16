@@ -34,18 +34,20 @@ export class LoginComponent implements OnInit {
       });
     }else{
       this.password = {'password' : this.usuario.password}
+      console.log('Correo Cum:',this.usuario.correo)
+      console.log('Contra Cum:',this.password)
       this.usuarioService
       .existe(this.usuario.correo, this.password)
-      .subscribe((resUsuario) => {
-        console.log(resUsuario);
+      .subscribe((resUsuario: any) => {
+        console.log('a: ',resUsuario);
         if (resUsuario != -1) {
-          console.log('res usuario: '+resUsuario)
+          console.log('res usuario: ', resUsuario)
           this.idProfesor = Number('Token:\n' + resUsuario);
           localStorage.setItem('token', resUsuario + '');
           localStorage.setItem('correo',this.usuario.correo);
           console.log('id profesor', + this.idProfesor)
           localStorage.setItem('idProfesor', this.idProfesor + '');
-          this.router.navigateByUrl(`/home/generales/${this.idProfesor}`);
+          this.router.navigateByUrl(`/home/generales/${resUsuario.idProfesor}`);
         } 
       });
     }
